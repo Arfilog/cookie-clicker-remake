@@ -2,7 +2,29 @@
 
 [ext_resource type="Texture2D" uid="uid://cc1jbrse75q51" path="res://assets/cookie-512px.png" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dks8cy0dtx26t" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="FontFile" uid="uid://yaj26r3tykyi" path="res://assets/Fredoka-Bold.ttf" id="2_iywne"]
+[ext_resource type="Script" uid="uid://dmosokjal7cxd" path="res://scripts/animations.gd" id="2_p57ef"]
 [ext_resource type="Script" uid="uid://ces38lssn25l1" path="res://scripts/cookies_label.gd" id="3_lnu2h"]
+[ext_resource type="FontFile" uid="uid://b670jrkdwl2le" path="res://assets/Fredoka-Regular.ttf" id="4_p57ef"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hfh6"]
+bg_color = Color(2.5027991e-06, 0.6586465, 0.85174346, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ijch"]
+bg_color = Color(0, 0.2969851, 0.6781502, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i76qg"]
+bg_color = Color(0.22059873, 0.61209005, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 5.0
+expand_margin_right = 20.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qui0"]
 
 [node name="Game" type="Control" unique_id=1150532910]
 layout_mode = 3
@@ -13,46 +35,94 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqjtg")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=395680849]
+[node name="LeftPanel" type="Panel" parent="." unique_id=2107109620]
+z_index = -1
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 820.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hfh6")
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftPanel" unique_id=910072563]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("2_p57ef")
 
-[node name="CookieButton" type="TextureButton" parent="CenterContainer" unique_id=282747143]
-custom_minimum_size = Vector2(200, 200)
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftPanel/MarginContainer" unique_id=988564375]
 layout_mode = 2
-texture_normal = ExtResource("1_uwrxv")
-ignore_texture_size = true
-stretch_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=988564375]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
-
-[node name="CookiesLabel" type="Label" parent="VBoxContainer" unique_id=1245739180]
+[node name="CookiesLabel" type="Label" parent="LeftPanel/MarginContainer/VBoxContainer" unique_id=1245739180]
 layout_mode = 2
 size_flags_vertical = 1
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_iywne")
 theme_override_font_sizes/font_size = 40
 text = " 0 Cookies"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_lnu2h")
 
-[node name="Panel" type="Panel" parent="." unique_id=2107109620]
-z_index = -1
+[node name="CPSLabel" type="Label" parent="LeftPanel/MarginContainer/VBoxContainer" unique_id=14334639]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_p57ef")
+theme_override_font_sizes/font_size = 25
+text = " 0 PER SECOND"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_lnu2h")
+
+[node name="CenterContainer" type="CenterContainer" parent="LeftPanel/MarginContainer" unique_id=395680849]
+layout_mode = 2
+
+[node name="CookieButton" type="TextureButton" parent="LeftPanel/MarginContainer/CenterContainer" unique_id=282747143]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture_normal = ExtResource("1_uwrxv")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RightPanel" type="Panel" parent="." unique_id=324755016]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_left = -332.0
+grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ijch")
 
-[connection signal="update_cookies" from="." to="VBoxContainer/CookiesLabel" method="_on_game_update_cookies"]
-[connection signal="button_down" from="CenterContainer/CookieButton" to="." method="_on_cookie_button_button_down"]
+[node name="Upgrades" type="Label" parent="RightPanel" unique_id=1808001245]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.5
+offset_top = 20.0
+offset_right = 104.5
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_iywne")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxFlat_i76qg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_0qui0")
+text = "UPGRADES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="update_cookies" from="." to="LeftPanel/MarginContainer/VBoxContainer/CookiesLabel" method="_on_game_update_cookies"]
+[connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="." method="_on_cookie_button_button_down"]
+[connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_down"]
+[connection signal="button_up" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_up"]
