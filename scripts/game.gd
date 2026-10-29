@@ -3,9 +3,10 @@ extends Control
 var save_path = "user://userdata.save"
 
 var cookies = 0
-var cookies_per_click = 1
+var amount_per_click = 1
 
 signal update_cookies
+signal cookie_clicked
 
 func _ready():
 	load_data()
@@ -30,6 +31,7 @@ func load_data():
 			save_data()
 
 func _on_cookie_button_button_down() -> void:
-	cookies += cookies_per_click
+	cookies += amount_per_click
 	emit_signal("update_cookies", cookies)
+	emit_signal("cookie_clicked", amount_per_click)
 	save_data()

@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://yaj26r3tykyi" path="res://assets/Fredoka-Bold.ttf" id="2_iywne"]
 [ext_resource type="Script" uid="uid://dmosokjal7cxd" path="res://scripts/animations.gd" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dvyn5heh5brji" path="res://assets/sunburst.png" id="2_u5sy4"]
+[ext_resource type="Script" uid="uid://r6b0yvg83hoy" path="res://scripts/destroy.gd" id="3_gee14"]
 [ext_resource type="Script" uid="uid://ces38lssn25l1" path="res://scripts/cookies_label.gd" id="3_lnu2h"]
 [ext_resource type="FontFile" uid="uid://b670jrkdwl2le" path="res://assets/Fredoka-Regular.ttf" id="4_p57ef"]
 
@@ -74,6 +75,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yqjtg")
 
+[node name="Indicators" type="Control" parent="." unique_id=857068273]
+top_level = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Template" type="Label" parent="Indicators" unique_id=1005494524]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_iywne")
+theme_override_font_sizes/font_size = 30
+text = "+0"
+script = ExtResource("3_gee14")
+
+[node name="DestroyTimer" type="Timer" parent="Indicators/Template" unique_id=1245752109]
+
 [node name="LeftPanel" type="Panel" parent="." unique_id=2107109620]
 z_index = -1
 layout_mode = 1
@@ -85,6 +105,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3hfh6")
 
 [node name="Background" type="TextureRect" parent="LeftPanel" unique_id=238605959]
+modulate = Color(1, 1, 1, 0.5882353)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,7 +198,9 @@ text = "UPGRADES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="cookie_clicked" from="." to="LeftPanel/MarginContainer" method="_on_game_cookie_clicked"]
 [connection signal="update_cookies" from="." to="LeftPanel/MarginContainer/VBoxContainer/CookiesLabel" method="_on_game_update_cookies"]
+[connection signal="timeout" from="Indicators/Template/DestroyTimer" to="Indicators/Template" method="_on_destroy_timer_timeout"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="." method="_on_cookie_button_button_down"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_down"]
 [connection signal="button_up" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_up"]
