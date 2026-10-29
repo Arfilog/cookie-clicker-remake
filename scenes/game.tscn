@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://r6b0yvg83hoy" path="res://scripts/destroy.gd" id="3_gee14"]
 [ext_resource type="Script" uid="uid://ces38lssn25l1" path="res://scripts/cookies_label.gd" id="3_lnu2h"]
 [ext_resource type="FontFile" uid="uid://b670jrkdwl2le" path="res://assets/Fredoka-Regular.ttf" id="4_p57ef"]
+[ext_resource type="Script" uid="uid://ckfutjmvgubih" path="res://scripts/upgrades.gd" id="9_0tnpc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hfh6"]
 bg_color = Color(2.5027991e-06, 0.6586465, 0.85174346, 1)
@@ -65,6 +66,21 @@ expand_margin_right = 20.0
 expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0qui0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtaks"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(3.272891e-06, 0.586715, 0.871162, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+shadow_size = 2
 
 [node name="Game" type="Control" unique_id=1150532910]
 layout_mode = 3
@@ -179,6 +195,7 @@ offset_left = -332.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0ijch")
+script = ExtResource("9_0tnpc")
 
 [node name="Upgrades" type="Label" parent="RightPanel" unique_id=1808001245]
 layout_mode = 1
@@ -198,9 +215,64 @@ text = "UPGRADES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanel" unique_id=577600061]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = -202.0
+offset_right = 111.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Upgrade1" type="Button" parent="RightPanel/VBoxContainer" unique_id=1645609640]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_p57ef")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
+text = "Cookies Per Click
+(50)"
+
+[node name="Upgrade2" type="Button" parent="RightPanel/VBoxContainer" unique_id=673654427]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_p57ef")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
+text = "Cookies Per Click
+(200)"
+
+[node name="Upgrade3" type="Button" parent="RightPanel/VBoxContainer" unique_id=659593747]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_p57ef")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
+text = "Auto Clicking
+(300)"
+
+[node name="Upgrade4" type="Button" parent="RightPanel/VBoxContainer" unique_id=972692451]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("4_p57ef")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
+text = "Cookies Per Click
+(1000)"
+
 [connection signal="cookie_clicked" from="." to="LeftPanel/MarginContainer" method="_on_game_cookie_clicked"]
 [connection signal="update_cookies" from="." to="LeftPanel/MarginContainer/VBoxContainer/CookiesLabel" method="_on_game_update_cookies"]
 [connection signal="timeout" from="Indicators/Template/DestroyTimer" to="Indicators/Template" method="_on_destroy_timer_timeout"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="." method="_on_cookie_button_button_down"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_down"]
 [connection signal="button_up" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_up"]
+[connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade1" to="RightPanel" method="_on_upgrade_1_button_down"]
+[connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade2" to="RightPanel" method="_on_upgrade_2_button_down"]
+[connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade3" to="RightPanel" method="_on_upgrade_3_button_down"]
+[connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade4" to="RightPanel" method="_on_upgrade_4_button_down"]

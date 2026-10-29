@@ -15,6 +15,7 @@ func _ready():
 func save_data():
 	var data = {
 		"cookies": cookies,
+		"amount_per_click": amount_per_click,
 	}
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_var(data)
@@ -27,8 +28,14 @@ func load_data():
 		file.close()
 		if typeof(data) == TYPE_DICTIONARY:
 			cookies = data.get("cookies", 0)
+			amount_per_click = data.get("amount_per_click", 1)
+			update_data(data)
 		else:
 			save_data()
+
+func update_data(data):
+	for key in data.keys():
+		print(key + ": " + str(data[key]))
 
 func _on_cookie_button_button_down() -> void:
 	cookies += amount_per_click
