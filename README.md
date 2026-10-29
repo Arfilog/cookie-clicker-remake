@@ -1,4 +1,5 @@
-**COOKIE CLICKER REMAKE**
+COOKIE CLICKER REMAKE
+
 (28/10/2026 -> 29/10/2026)
 This repo was made for learning purposes in my game developer journey.
 What I learned:
