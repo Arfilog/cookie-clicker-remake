@@ -5,6 +5,7 @@ extends MarginContainer
 @onready var template: Label = $"../../Indicators/Template"
 
 func _ready() -> void:
+	Game.cookie_clicked.connect(_on_game_cookie_clicked)
 	cookie_button.pivot_offset = cookie_button.size / 2
 
 func _on_cookie_button_button_down() -> void:

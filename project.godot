@@ -14,6 +14,10 @@ config/name="Cookie Clicker Remake"
 run/main_scene="uid://rcs1tlh7jjv3"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
+[autoload]
+
+Game="*uid://dks8cy0dtx26t"
+
 [display]
 
 window/stretch/mode="canvas_items"

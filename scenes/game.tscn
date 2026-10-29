@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://rcs1tlh7jjv3"]
 
+[ext_resource type="Script" uid="uid://b1sd3x5lqt6xg" path="res://scripts/main.gd" id="1_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://cc1jbrse75q51" path="res://assets/cookie-512px.png" id="1_uwrxv"]
-[ext_resource type="Script" uid="uid://dks8cy0dtx26t" path="res://scripts/game.gd" id="1_yqjtg"]
 [ext_resource type="FontFile" uid="uid://yaj26r3tykyi" path="res://assets/Fredoka-Bold.ttf" id="2_iywne"]
 [ext_resource type="Script" uid="uid://dmosokjal7cxd" path="res://scripts/animations.gd" id="2_p57ef"]
 [ext_resource type="Texture2D" uid="uid://dvyn5heh5brji" path="res://assets/sunburst.png" id="2_u5sy4"]
@@ -89,7 +89,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yqjtg")
+script = ExtResource("1_0tnpc")
 
 [node name="Indicators" type="Control" parent="." unique_id=857068273]
 top_level = true
@@ -236,7 +236,7 @@ theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_p57ef")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
-text = "Cookies Per Click
+text = "+1 C Per Click
 (50)"
 
 [node name="Upgrade2" type="Button" parent="RightPanel/VBoxContainer" unique_id=673654427]
@@ -245,7 +245,7 @@ theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_p57ef")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
-text = "Cookies Per Click
+text = "+1 C Per Click
 (200)"
 
 [node name="Upgrade3" type="Button" parent="RightPanel/VBoxContainer" unique_id=659593747]
@@ -254,8 +254,8 @@ theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_p57ef")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
-text = "Auto Clicking
-(300)"
+text = "+2 C Per Click
+(500)"
 
 [node name="Upgrade4" type="Button" parent="RightPanel/VBoxContainer" unique_id=972692451]
 layout_mode = 2
@@ -263,11 +263,19 @@ theme_override_constants/outline_size = 0
 theme_override_fonts/font = ExtResource("4_p57ef")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
-text = "Cookies Per Click
+text = "+5 C Per Click
 (1000)"
 
-[connection signal="cookie_clicked" from="." to="LeftPanel/MarginContainer" method="_on_game_cookie_clicked"]
-[connection signal="update_cookies" from="." to="LeftPanel/MarginContainer/VBoxContainer/CookiesLabel" method="_on_game_update_cookies"]
+[node name="ResetData" type="Button" parent="RightPanel/VBoxContainer" unique_id=1461274300]
+visible = false
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("2_iywne")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_vtaks")
+text = "Reset all your 
+progress!"
+
 [connection signal="timeout" from="Indicators/Template/DestroyTimer" to="Indicators/Template" method="_on_destroy_timer_timeout"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="." method="_on_cookie_button_button_down"]
 [connection signal="button_down" from="LeftPanel/MarginContainer/CenterContainer/CookieButton" to="LeftPanel/MarginContainer" method="_on_cookie_button_button_down"]
@@ -276,3 +284,4 @@ text = "Cookies Per Click
 [connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade2" to="RightPanel" method="_on_upgrade_2_button_down"]
 [connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade3" to="RightPanel" method="_on_upgrade_3_button_down"]
 [connection signal="button_down" from="RightPanel/VBoxContainer/Upgrade4" to="RightPanel" method="_on_upgrade_4_button_down"]
+[connection signal="button_down" from="RightPanel/VBoxContainer/ResetData" to="RightPanel" method="_on_reset_data_button_down"]
