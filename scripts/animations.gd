@@ -22,3 +22,5 @@ func _on_game_cookie_clicked(amount) -> void:
 	indicator.visible = true
 	indicators.add_child(indicator)
 	indicator.get_child(0).start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(indicator, "modulate:a", 0.0, 0.99)
